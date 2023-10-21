@@ -3,6 +3,8 @@ package com.leonikl.posts.screens.pass
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -15,7 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.leonikl.posts.R
-import com.leonikl.posts.myfun.MyTextField
+import com.leonikl.posts.myfun.PasswordField
+import com.leonikl.posts.myfun.ShowBars
 import com.leonikl.posts.view.MainViewModel
 import com.leonikl.posts.view.MyViewModel
 
@@ -26,55 +29,63 @@ fun CreatePassScreen(
     model: MyViewModel,
     navController: NavHostController,
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = stringResource(id = R.string.add_pass)
-        )
-        MyTextField(
-            placeholder = stringResource(id = R.string.pass),
-            value = model.password,
-            onValueChange = {
-                model.password = it
+    ShowBars(true)
+    Scaffold {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(id = R.string.add_pass)
+            )
+            PasswordField(
+                placeholder = stringResource(id = R.string.pass),
+                value = model.createPassword,
+                onValueChange = {
+                    model.createPassword = it
+                }
+            )
+            PasswordField(
+                placeholder = stringResource(id = R.string.pass),
+                value = model.createPasswordRepeat,
+                onValueChange = {
+                    model.createPasswordRepeat = it
+                }
+            )
+            var str by remember {
+                mutableStateOf(false)
             }
-        )
-        MyTextField(
-            placeholder = stringResource(id = R.string.pass),
-            value = model.passwordRepeat,
-            onValueChange = {
-                model.passwordRepeat = it
+            if (str){
+                Text(text = stringResource(id = R.string.pass_dont_match))
             }
-        )
-        var str by remember {
-            mutableStateOf("")
-        }
-        Text(
-            text = str
-        )
-        if (model.password != model.passwordRepeat){
-            str = "Пароли не совпадают!"
-        }
-        else{
-            str = ""
-            if (model.password.isNotBlank()){
-                TextButton(
-                    onClick = {
-                        model.pass.password = model.password
-                        model.pass.state = true
-                        viewModel.updatePage(model.pass)
-                        model.statePass = true
-                        navController.navigate("EnterPassScreen")
+            if (model.createPassword != model.createPasswordRepeat){
+                str = true
+            }
+            else{
+                str = false
+                if (model.createPassword.isNotBlank()){
+                    TextButton(
+                        onClick = {
+                            model.pass.password = model.createPassword
+                            model.pass.state = true
+                            viewModel.updatePage(model.pass)
+                            model.statePass = true
+                            navController.navigate("EnterPassScreen"){
+                                popUpTo(0)
+                            }
+                        }
+                    ) {
+                        Text(text = stringResource(id = R.string.save_pass))
                     }
-                ) {
-                    Text(text = "Сохранить")
                 }
             }
-        }
 
+        }
     }
+
 }
 
 

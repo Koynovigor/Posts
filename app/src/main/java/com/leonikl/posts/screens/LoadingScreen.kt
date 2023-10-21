@@ -12,11 +12,7 @@ fun LoadingScreen(
     navController: NavHostController,
     model: MyViewModel
 ) {
-    ShowBars(
-        isSystemBarsVisible = false,
-        isNavigationBarVisible = false,
-        isStatusBarVisible = false
-    )
+    ShowBars(false)
     LaunchedEffect(
         key1 = true
     ){

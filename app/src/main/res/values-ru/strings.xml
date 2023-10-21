@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_pass">Придумайте пароль</string>
+    <string name="enter_pass">Введите пароль</string>
+    <string name="pass">Пароль</string>
+    <string name="wrong_pass">Не верный пароль!</string>
+    <string name="log_in">Войти</string>
+    <string name="pass_dont_match">Пароли не совпадают!</string>
+    <string name="save_pass">Сохранить пароль</string>
+</resources>

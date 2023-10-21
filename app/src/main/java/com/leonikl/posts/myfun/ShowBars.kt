@@ -15,3 +15,14 @@ fun ShowBars(
         this.isStatusBarVisible = isStatusBarVisible
     }
 }
+
+@Composable
+fun ShowBars(
+    state: Boolean
+){
+    rememberSystemUiController().apply {
+        this.isSystemBarsVisible = state
+        this.isNavigationBarVisible = state
+        this.isStatusBarVisible = state
+    }
+}

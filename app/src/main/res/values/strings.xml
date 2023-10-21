@@ -3,4 +3,8 @@
     <string name="add_pass">Create a password</string>
     <string name="enter_pass">Enter the password</string>
     <string name="pass">Password</string>
+    <string name="wrong_pass">Wrong password!</string>
+    <string name="log_in">Log in</string>
+    <string name="pass_dont_match">Passwords don\'t match!</string>
+    <string name="save_pass">Save the entered password</string>
 </resources>

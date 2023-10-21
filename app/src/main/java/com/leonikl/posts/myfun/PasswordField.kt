@@ -3,6 +3,7 @@ package com.leonikl.posts.myfun
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -12,10 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MyTextField(
+fun PasswordField(
     placeholder: String?,
     value: String,
     onValueChange: (String) -> Unit,
@@ -29,6 +31,7 @@ fun MyTextField(
                 color = Color.Gray
             )
         },
+        singleLine = true,
         modifier = Modifier
             .height(50.dp)
             .padding(end = 5.dp)
@@ -40,10 +43,12 @@ fun MyTextField(
             unfocusedTextColor = Color.Black,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
+            cursorColor = Color.Transparent
         ),
         shape = RoundedCornerShape(percent = 10),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Password
-        )
+        ),
+        visualTransformation = PasswordVisualTransformation(),
     )
 }

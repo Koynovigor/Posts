@@ -9,8 +9,9 @@ import com.leonikl.posts.database.Page
 
 class MyViewModel:ViewModel() {
 
-    var password by mutableStateOf("")
-    var passwordRepeat by mutableStateOf("")
+    var enterPassword by mutableStateOf("")
+    var createPassword by mutableStateOf("")
+    var createPasswordRepeat by mutableStateOf("")
 
     var pass: Page = Page()
     var statePass by mutableStateOf(pass.state)
