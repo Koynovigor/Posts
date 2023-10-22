@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.leonikl.posts.database.Page
 import com.leonikl.posts.screens.LoadingScreen
+import com.leonikl.posts.screens.PostsScreen
 import com.leonikl.posts.screens.pass.CreatePassScreen
 import com.leonikl.posts.screens.pass.EnterPassScreen
 import com.leonikl.posts.view.MainViewModel
@@ -26,11 +27,11 @@ class MainActivity : ComponentActivity() {
 
     private val model = MyViewModel()
 
+    private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val owner = LocalViewModelStoreOwner.current
-            lateinit var viewModel: MainViewModel
             owner?.let {
                 viewModel = viewModel(
                     it,
@@ -41,20 +42,21 @@ class MainActivity : ComponentActivity() {
                     )
                 )
             }
-
-            val page = Page(
-                id = 0,
-                page = "Hello!",
-                password = "0000",
-                state = false
+            viewModel.insertPage(model.passPage)
+            viewModel.insertPage(model.page)
+            viewModel.insertPage(
+                Page(
+                    id = 2
+                )
             )
-            viewModel.insertPage(page)
+
             val allPages by viewModel.allPages.observeAsState(listOf())
             for (i in allPages){
                 model.pass = i
                 model.statePass = i.state
                 break
             }
+
 
             val navController = rememberNavController()
             NavHost(
@@ -69,7 +71,8 @@ class MainActivity : ComponentActivity() {
                 }
                 composable("EnterPassScreen") {
                     EnterPassScreen(
-                        model = model
+                        model = model,
+                        navController = navController
                     )
                 }
                 composable("CreatePassScreen") {
@@ -79,7 +82,26 @@ class MainActivity : ComponentActivity() {
                         navController = navController
                     )
                 }
+                composable("PostsScreen"){
+                    PostsScreen(
+                        viewModel = viewModel,
+                        model = model
+                    )
+                }
             }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (model.savePage.id != 0){
+            viewModel.updatePage(model.savePage)
+        }
+    }
+    override fun onStop() {
+        super.onStop()
+        if (model.savePage.id != 0){
+            viewModel.updatePage(model.savePage)
         }
     }
 }

@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavHostController
 import com.leonikl.posts.R
 import com.leonikl.posts.myfun.PasswordField
 import com.leonikl.posts.myfun.ShowBars
@@ -23,7 +24,8 @@ import com.leonikl.posts.view.MyViewModel
 
 @Composable
 fun EnterPassScreen(
-    model: MyViewModel
+    model: MyViewModel,
+    navController: NavHostController
 ) {
     ShowBars(true)
     Scaffold { paddingValues ->
@@ -47,24 +49,22 @@ fun EnterPassScreen(
             var str by remember {
                 mutableStateOf(true)
             }
-            var stateStr by remember {
-                mutableStateOf(false)
-            }
             TextButton(
                 onClick = {
                     str = model.pass.password == model.enterPassword
-                    stateStr = true
+                    model.enterPassword = ""
+                    if (str){
+                        navController.navigate("PostsScreen")
+                    }
                 }
             ) {
                 Text(text = stringResource(id = R.string.log_in))
             }
-            if (stateStr){
-                Text(
-                    text = if (str) {
-                        "Успешно!"
-                    } else stringResource(id = R.string.wrong_pass)
-                )
-            }
+            Text(
+                text = if (str) {
+                    ""
+                } else stringResource(id = R.string.wrong_pass)
+            )
         }
     }
 

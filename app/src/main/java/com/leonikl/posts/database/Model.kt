@@ -21,6 +21,9 @@ class Page {
     var state: Boolean = false
 
     constructor()
+    constructor(id: Int){
+        this.id = id
+    }
     constructor(id: Int, page: String, password: String, state: Boolean) {
         this.id = id
         this.page = page

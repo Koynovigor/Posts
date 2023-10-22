@@ -30,11 +30,11 @@ fun CreatePassScreen(
     navController: NavHostController,
 ) {
     ShowBars(true)
-    Scaffold {
+    Scaffold { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it),
+                .padding(paddingValues),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
