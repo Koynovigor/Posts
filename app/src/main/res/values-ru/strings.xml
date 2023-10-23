@@ -2,9 +2,17 @@
 <resources>
     <string name="add_pass">Придумайте пароль</string>
     <string name="enter_pass">Введите пароль</string>
-    <string name="pass">Пароль</string>
+    <string name="new_pass">Новый пароль</string>
     <string name="wrong_pass">Не верный пароль!</string>
     <string name="log_in">Войти</string>
     <string name="pass_dont_match">Пароли не совпадают!</string>
     <string name="save_pass">Сохранить пароль</string>
+    <string name="forgot_pass">Забыли пароль?</string>
+    <string name="text_dialog">Для сохранения конфиденциальных данных восстановление пароля невозможно!\nПостарайтесь вспомнить свой пароль!</string>
+    <string name="ok">Подтвердить</string>
+    <string name="change_pass">Сменить пароль</string>
+    <string name="day">День</string>
+    <string name="repeat_pass">Повторите пароль</string>
+    <string name="pass">Пароль</string>
+    <string name="successfully_changed">Пароль успешно изменён!</string>
 </resources>

@@ -2,9 +2,17 @@
     <string name="app_name" translatable="false">Posts</string>
     <string name="add_pass">Create a password</string>
     <string name="enter_pass">Enter the password</string>
-    <string name="pass">Password</string>
+    <string name="new_pass">New Password</string>
     <string name="wrong_pass">Wrong password!</string>
     <string name="log_in">Log in</string>
     <string name="pass_dont_match">Passwords don\'t match!</string>
-    <string name="save_pass">Save the entered password</string>
+    <string name="save_pass">Save the password</string>
+    <string name="forgot_pass">Forgot your password?</string>
+    <string name="text_dialog">Password recovery is not possible to save confidential data!\nTry to remember your password!</string>
+    <string name="ok">Confirm</string>
+    <string name="change_pass">Change Password</string>
+    <string name="day">Day</string>
+    <string name="repeat_pass">Repeat the password</string>
+    <string name="pass">Password</string>
+    <string name="successfully_changed">The password has been successfully changed!</string>
 </resources>

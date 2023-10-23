@@ -19,6 +19,7 @@ import com.leonikl.posts.screens.LoadingScreen
 import com.leonikl.posts.screens.PostsScreen
 import com.leonikl.posts.screens.pass.CreatePassScreen
 import com.leonikl.posts.screens.pass.EnterPassScreen
+import com.leonikl.posts.ui.theme.PostsTheme
 import com.leonikl.posts.view.MainViewModel
 import com.leonikl.posts.view.MainViewModelFactory
 import com.leonikl.posts.view.MyViewModel
@@ -30,7 +31,11 @@ class MainActivity : ComponentActivity() {
     private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
+
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
             val owner = LocalViewModelStoreOwner.current
             owner?.let {
                 viewModel = viewModel(
@@ -57,38 +62,41 @@ class MainActivity : ComponentActivity() {
                 break
             }
 
-
             val navController = rememberNavController()
-            NavHost(
-                navController = navController,
-                startDestination = "Loading"
-            ){
-                composable("Loading"){
-                    LoadingScreen(
-                        navController = navController,
-                        model = model
-                    )
-                }
-                composable("EnterPassScreen") {
-                    EnterPassScreen(
-                        model = model,
-                        navController = navController
-                    )
-                }
-                composable("CreatePassScreen") {
-                    CreatePassScreen(
-                        viewModel = viewModel,
-                        model = model,
-                        navController = navController
-                    )
-                }
-                composable("PostsScreen"){
-                    PostsScreen(
-                        viewModel = viewModel,
-                        model = model
-                    )
+
+            PostsTheme{
+                NavHost(
+                    navController = navController,
+                    startDestination = "Loading"
+                ){
+                    composable("Loading"){
+                        LoadingScreen(
+                            navController = navController,
+                            model = model
+                        )
+                    }
+                    composable("EnterPassScreen") {
+                        EnterPassScreen(
+                            model = model,
+                            navController = navController
+                        )
+                    }
+                    composable("CreatePassScreen") {
+                        CreatePassScreen(
+                            viewModel = viewModel,
+                            model = model,
+                            navController = navController
+                        )
+                    }
+                    composable("PostsScreen"){
+                        PostsScreen(
+                            viewModel = viewModel,
+                            model = model
+                        )
+                    }
                 }
             }
+
         }
     }
 

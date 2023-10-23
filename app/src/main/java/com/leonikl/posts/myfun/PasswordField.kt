@@ -12,9 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.leonikl.posts.R
 
 @Composable
 fun PasswordField(
@@ -33,22 +38,25 @@ fun PasswordField(
         },
         singleLine = true,
         modifier = Modifier
-            .height(50.dp)
-            .padding(end = 5.dp)
-            .clip(RoundedCornerShape(10.dp)),
+            .padding(5.dp),
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Color(0xFFF1F2F4),
             unfocusedContainerColor = Color(0xFFF1F2F4),
             focusedTextColor = Color.Black,
             unfocusedTextColor = Color.Black,
             focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            cursorColor = Color.Transparent
+            unfocusedIndicatorColor = Color.Transparent
         ),
         shape = RoundedCornerShape(percent = 10),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Password
         ),
         visualTransformation = PasswordVisualTransformation(),
+        textStyle = TextStyle(
+            color = Color.Black,
+            fontFamily = FontFamily(
+                Font(R.font.comic_sans, FontWeight.Normal)
+            )
+        ),
     )
 }

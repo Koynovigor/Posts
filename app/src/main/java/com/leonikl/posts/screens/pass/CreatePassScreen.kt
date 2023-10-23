@@ -14,7 +14,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavHostController
 import com.leonikl.posts.R
 import com.leonikl.posts.myfun.PasswordField
@@ -39,17 +44,21 @@ fun CreatePassScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.add_pass)
+                text = stringResource(id = R.string.add_pass),
+                fontFamily = FontFamily(
+                    Font(R.font.comic_sans, FontWeight.Normal)
+                ),
+                color = Color.Black,
             )
             PasswordField(
-                placeholder = stringResource(id = R.string.pass),
+                placeholder = stringResource(id = R.string.new_pass),
                 value = model.createPassword,
                 onValueChange = {
                     model.createPassword = it
                 }
             )
             PasswordField(
-                placeholder = stringResource(id = R.string.pass),
+                placeholder = stringResource(id = R.string.repeat_pass),
                 value = model.createPasswordRepeat,
                 onValueChange = {
                     model.createPasswordRepeat = it
@@ -59,7 +68,13 @@ fun CreatePassScreen(
                 mutableStateOf(false)
             }
             if (str){
-                Text(text = stringResource(id = R.string.pass_dont_match))
+                Text(
+                    text = stringResource(id = R.string.pass_dont_match),
+                    color = Color.Black,
+                    fontFamily = FontFamily(
+                        Font(R.font.comic_sans, FontWeight.Normal)
+                    ),
+                )
             }
             if (model.createPassword != model.createPasswordRepeat){
                 str = true
@@ -78,7 +93,13 @@ fun CreatePassScreen(
                             }
                         }
                     ) {
-                        Text(text = stringResource(id = R.string.save_pass))
+                        Text(
+                            text = stringResource(id = R.string.save_pass),
+                            fontFamily = FontFamily(
+                                Font(R.font.comic_sans, FontWeight.Normal)
+                            ),
+                            color = Color.Black,
+                        )
                     }
                 }
             }
