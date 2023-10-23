@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -44,6 +45,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -80,6 +82,7 @@ fun PostsScreen(
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+
     var changePass by remember {
         mutableStateOf(false)
     }
@@ -87,10 +90,10 @@ fun PostsScreen(
         mutableStateOf(false)
     }
     var wrongPass by remember {
-        mutableIntStateOf(0)
+        mutableStateOf(false)
     }
     var matchPass by remember {
-        mutableIntStateOf(0)
+        mutableStateOf(false)
     }
     var successfully by remember {
         mutableStateOf(false)
@@ -98,6 +101,9 @@ fun PostsScreen(
     model.createPassword = ""
     model.createPasswordRepeat = ""
     model.enterPassword = ""
+    val configuration = LocalConfiguration.current
+    val widthInDp = configuration.screenWidthDp.dp
+
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -109,18 +115,28 @@ fun PostsScreen(
                                 "beta v 1.0.0",
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(bottom =  5.dp)
+                            .padding(bottom = 5.dp)
                             .alpha(0.4f),
                         fontSize = 12.sp,
                         textAlign = TextAlign.Center,
                         color = Color.Gray
                     )
-                }
+                },
+                modifier = Modifier
+                    .width(widthInDp * 0.9f)
+                    .clip(
+                        shape = RoundedCornerShape(
+                            topEnd = 15.dp,
+                            bottomEnd = 15.dp,
+                            topStart = 0.dp,
+                            bottomStart = 0.dp
+                        )
+                    )
+                    .background(Color.White)
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color.White)
                         .padding(
                             top = 10.dp,
                             start = 10.dp,
@@ -146,10 +162,19 @@ fun PostsScreen(
                                 ),
                             )
                         }
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "ArrowBack"
-                        )
+                        IconButton(
+                            onClick = {
+                                scope.launch {
+                                    drawerState.close()
+                                }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "ArrowBack"
+                            )
+                        }
+
                     }
                     if (changePass){
                         PasswordField(
@@ -176,10 +201,12 @@ fun PostsScreen(
                         TextButton(
                             onClick = {
                                 if(model.enterPassword != model.pass.password){
-                                    wrongPass = R.string.wrong_pass
+                                    wrongPass = true
+                                    matchPass = false
                                 }
                                 else if(model.createPassword != model.createPasswordRepeat){
-                                    matchPass = R.string.pass_dont_match
+                                    wrongPass = false
+                                    matchPass = true
                                 }
                                 else{
                                     model.pass.password = model.createPassword
@@ -188,8 +215,8 @@ fun PostsScreen(
                                     changePass = false
                                     textPass = false
                                     successfully = true
-                                    wrongPass = 0
-                                    matchPass = 0
+                                    wrongPass = false
+                                    matchPass = false
                                 }
                             }
                         ) {
@@ -201,20 +228,22 @@ fun PostsScreen(
                                 text = stringResource(id = R.string.save_pass)
                             )
                         }
-                        if (textPass){
+                        if (wrongPass) {
                             Text(
                                 color = Color.Black,
                                 fontFamily = FontFamily(
                                     Font(R.font.comic_sans, FontWeight.Normal)
                                 ),
-                                text = stringResource(id = wrongPass)
+                                text = stringResource(id = R.string.wrong_pass)
                             )
+                        }
+                        if (matchPass) {
                             Text(
                                 color = Color.Black,
                                 fontFamily = FontFamily(
                                     Font(R.font.comic_sans, FontWeight.Normal)
                                 ),
-                                text = stringResource(id = matchPass)
+                                text = stringResource(id = R.string.pass_dont_match)
                             )
                         }
                     }
@@ -231,8 +260,8 @@ fun PostsScreen(
                         changePass = false
                         textPass = false
                         successfully = false
-                        wrongPass = 0
-                        matchPass = 0
+                        wrongPass = false
+                        matchPass = false
                     }
                 }
             }

@@ -12,10 +12,10 @@ class Page {
     var id: Int = 0
 
     @ColumnInfo(name = "page")
-    var page: String = "Hello!"
+    var page: String = ""
 
     @ColumnInfo(name = "pass")
-    var password: String = "0000"
+    var password: String = ""
 
     @ColumnInfo(name = "state")
     var state: Boolean = false
