@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavHostController
 import com.leonikl.posts.R
 import com.leonikl.posts.myfun.PasswordField
@@ -120,6 +121,7 @@ fun EnterPassScreen(
                                         Font(R.font.comic_sans, FontWeight.Normal)
                                     ),
                                     color = Color.Black,
+                                    textAlign = TextAlign.Center,
                                 )
                             }
                         },
@@ -130,6 +132,7 @@ fun EnterPassScreen(
                                     Font(R.font.comic_sans, FontWeight.Normal)
                                 ),
                                 color = Color.Black,
+                                textAlign = TextAlign.Center,
                             )
                         },
                         text = {
@@ -139,6 +142,7 @@ fun EnterPassScreen(
                                     Font(R.font.comic_sans, FontWeight.Normal)
                                 ),
                                 color = Color.Black,
+                                textAlign = TextAlign.Center,
                             )
                         }
                     )

@@ -25,7 +25,7 @@ class MyViewModel:ViewModel() {
     )
     val page = Page(
         id = 1,
-        page = "Day 1: Я заебался",
+        page = "",
         password = "",
         state = false
     )
